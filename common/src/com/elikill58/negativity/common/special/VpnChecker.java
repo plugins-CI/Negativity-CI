@@ -75,7 +75,7 @@ public class VpnChecker extends Special implements Listeners {
 			e.setLoginResult(Result.KICK_OTHER);
 			Player cible = Adapter.getAdapter().getPlayer(e.getUUID());
 			if (cible != null)
-				cible.kick(reason);
+				
 		}
 	}
 
