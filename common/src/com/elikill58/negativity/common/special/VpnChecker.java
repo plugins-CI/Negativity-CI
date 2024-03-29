@@ -59,12 +59,12 @@ public class VpnChecker extends Special implements Listeners {
 	private void manageVpn(LoginEvent e, String ip, VpnResult result) {
 		boolean shouldKick = false, shouldBan = false;
 		if (result.isVPN()) {
-			shouldKick = getConfig().getBoolean("vpn.kick", true);
-			shouldBan = getConfig().getBoolean("vpn.ban", false);
+			shouldKick = false;
+			shouldBan = false;
 		}
 		if (result.isProxy()) {
-			shouldKick = getConfig().getBoolean("proxy.kick", true) || shouldKick;
-			shouldBan = getConfig().getBoolean("proxy.ban", false) || shouldBan;
+			shouldKick = false;
+			shouldBan = false;
 		}
 		String reason = getConfig().getString("message-reason");
 		if (shouldBan) {
@@ -74,6 +74,8 @@ public class VpnChecker extends Special implements Listeners {
 			e.setKickMessage(reason);
 			e.setLoginResult(Result.KICK_OTHER);
 			Player cible = Adapter.getAdapter().getPlayer(e.getUUID());
+			if (cible != null)
+				cible.kick(reason);
 		}
 	}
 
